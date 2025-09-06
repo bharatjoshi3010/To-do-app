@@ -16,6 +16,14 @@ export default function App() {
   const [taskText, setTaskText] = useState('')
   const [imp, setImp] = useState(false)
   const [arr, setArr] = useState(taskLists)
+
+
+  const handleRemoveTask = (index: number) => {
+    const updatedTasks = arr.filter((_, i) => i !== index);
+    setArr(updatedTasks);
+    // taskLists = arr;
+  };
+
   return (
     <SafeAreaView>
       <View><TextInput
@@ -25,33 +33,36 @@ export default function App() {
       </TextInput>
 
       <View>
-        <Pressable onPress={()=>{
-          taskLists.push({
-            taskString : taskText,
-            importance : imp
-          })
-          setTaskText('')
-          setImp(false)
-        }}>
-          <BouncyCheckbox
+        <BouncyCheckbox
                 isChecked={imp}
                 fillColor="red"
                 onPress={() => (setImp(!imp)) 
                 }
           />
           <Text>Is Important</Text>
+        <Pressable onPress={()=>{
+          arr.push({
+            taskString : taskText,
+            importance : imp
+          })
+          setTaskText('')
+          setImp(false)
+        }}>
+          
         <Text>Save Task</Text>
         </Pressable>
+        
       </View>
       <View>
         <FlatList
             data={arr}
             keyExtractor={(item, index) => index.toString()} // <-- generates "0", "1", "2"...
-            renderItem={({ item }) => (
+            renderItem={({ item, index }) => (
             <TaskCard
               taskString={item.taskString}
               importance={item.importance}
-
+              index={index}
+              onRemove={handleRemoveTask}
         />
         )}
     />

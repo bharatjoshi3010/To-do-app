@@ -1,6 +1,6 @@
 import { useState } from "react"
 
- const taskLists: task[] = [
+export const taskLists: task[] = [
     {
         taskString : 'Its a Sample Task',
         importance : false
@@ -10,4 +10,3 @@ import { useState } from "react"
         importance : false
     }
 ]
-export  const [arr, setArr] = useState(taskLists)

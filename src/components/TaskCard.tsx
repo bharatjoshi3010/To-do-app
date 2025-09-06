@@ -4,6 +4,8 @@ import React, { JSX, PropsWithChildren } from 'react'
 type TaskProps = PropsWithChildren<{
     taskString : string;
     importance : boolean;
+    index :number;
+    onRemove: (id: number) => void;
 }>
 
 
@@ -19,8 +21,8 @@ export default function TaskCard(props: TaskProps) : JSX.Element {
         </View>
         <View>
           <Pressable
-            
-          >
+        onPress={() => props.onRemove(props.index)} // calls App.tsx to remove this task
+      >
             <Text>Remove</Text>
           </Pressable>
         </View>
