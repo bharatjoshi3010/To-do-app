@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-export const taskLists: task[] = [
+export let taskLists: task[] = [
     {
         taskString : 'Its a Sample Task',
         importance : false
@@ -10,3 +10,7 @@ export const taskLists: task[] = [
         importance : false
     }
 ]
+
+export const updateMasterTaskList = (newTasks: task[]) => {
+  taskLists = newTasks;
+};
