@@ -15,7 +15,7 @@ export default function App() {
         ReactNativeHapticFeedback.trigger("impactHeavy", options);
       }}>
         <View style={styles.btn}>
-          <Text style={styles.btnTxt}>App</Text>
+          <Text style={styles.btnTxt}>Click Me</Text>
         </View></Pressable>
     </SafeAreaView>
   )
