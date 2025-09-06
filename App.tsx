@@ -1,45 +1,42 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
+import { Pressable, StyleSheet, Text, View } from 'react-native'
+import React from 'react'
+import { SafeAreaView } from 'react-native-safe-area-context'
+import ReactNativeHapticFeedback from "react-native-haptic-feedback";
 
-import { NewAppScreen } from '@react-native/new-app-screen';
-import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
-import {
-  SafeAreaProvider,
-  useSafeAreaInsets,
-} from 'react-native-safe-area-context';
+const options = {
+  enableVibrateFallback: true,
+  ignoreAndroidSystemSettings: false,
+};
 
-function App() {
-  const isDarkMode = useColorScheme() === 'dark';
-
+export default function App() {
   return (
-    <SafeAreaProvider>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <AppContent />
-    </SafeAreaProvider>
-  );
-}
-
-function AppContent() {
-  const safeAreaInsets = useSafeAreaInsets();
-
-  return (
-    <View style={styles.container}>
-      <NewAppScreen
-        templateFileName="App.tsx"
-        safeAreaInsets={safeAreaInsets}
-      />
-    </View>
-  );
+    <SafeAreaView style={styles.container}>
+      <Pressable onPress={()=> {
+        ReactNativeHapticFeedback.trigger("impactHeavy", options);
+      }}>
+        <View style={styles.btn}>
+          <Text style={styles.btnTxt}>App</Text>
+        </View></Pressable>
+    </SafeAreaView>
+  )
 }
 
 const styles = StyleSheet.create({
-  container: {
+  container:{
     flex: 1,
+    justifyContent : 'center',
+    alignItems : 'center',
+    backgroundColor: 'pink'
   },
-});
-
-export default App;
+  btn:{
+    borderWidth: 2,
+    height : 50,
+    width: 100,
+    justifyContent: 'center',
+    alignItems : 'center'
+  },
+  btnTxt:{
+    fontWeight : 'bold',
+    fontSize : 20
+  }
+})
