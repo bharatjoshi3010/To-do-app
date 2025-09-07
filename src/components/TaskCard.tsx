@@ -1,5 +1,6 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native'
 import React, { JSX, PropsWithChildren } from 'react'
+import ReactNativeHapticFeedback from "react-native-haptic-feedback";
 
 type TaskProps = PropsWithChildren<{
     taskString : string;
@@ -8,9 +9,15 @@ type TaskProps = PropsWithChildren<{
     onRemove: (id: number) => void;
 }>
 
+const options = {
+  enableVibrateFallback: true,
+  ignoreAndroidSystemSettings: false,
+};
 
 
 export default function TaskCard(props: TaskProps) : JSX.Element {
+
+  
   return (
     <View style={styles.card}>
       <View style={styles.text}>
@@ -23,7 +30,10 @@ export default function TaskCard(props: TaskProps) : JSX.Element {
         </View>
         
           <Pressable style={styles.btn}
-        onPress={() => props.onRemove(props.index)} // calls App.tsx to remove this task
+        onPress={() => {
+          props.onRemove(props.index)
+          ReactNativeHapticFeedback.trigger("impactHeavy", options);
+        }} // calls App.tsx to remove this task
       ><View >
             <Text style={styles.btnText}>Remove</Text>
             </View>

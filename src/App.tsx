@@ -74,6 +74,7 @@ export default function App() {
       taskString: taskText,
       importance: imp
     }];
+
     setArr(updatedTasks);
     setTaskText('');
 
@@ -86,7 +87,7 @@ export default function App() {
   };
 
   return (
-    <SafeAreaView style={{backgroundColor:'#e7eef8', flex:1
+    <SafeAreaView style={{backgroundColor:'#e7eef8', flex:1, paddingTop:25
     }}>
       <View style={styles.inputArea}>
         <View style = {styles.textArea}>
@@ -119,13 +120,14 @@ export default function App() {
       
       <Pressable style={styles.addBtn}
       onPress={() => {
+        ReactNativeHapticFeedback.trigger("impactHeavy", options);
             if (taskText) {
               handleAddTask();
               setImp(false)
               // setArr(taskLists)
             } else {
               Snackbar.show({
-                text: "Enter a value to convert",
+                text: "Enter a valid task to add",
                 backgroundColor: "#EA7773",
                 textColor: "#000000"
               })
@@ -140,7 +142,9 @@ export default function App() {
           <FlatList
             style={styles.flat}
             data={arr}
-            keyExtractor={(item, index) => index.toString()} // <-- generates "0", "1", "2"...
+            contentContainerStyle={{ paddingBottom: 250 }} // it gives extra scroll to flat list show all elements can render properly
+            keyExtractor={(item, index) => index.toString()} 
+            // <-- generates "0", "1", "2"...
             renderItem={({ item, index }) => (
               <TaskCard
                 taskString={item.taskString}
